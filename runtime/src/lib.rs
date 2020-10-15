@@ -131,6 +131,30 @@ parameter_types! {
 	pub const Version: RuntimeVersion = VERSION;
 }
 
+// source: https://github.com/open-web3-stack/open-runtime-module-library/blob/master/nft/src/lib.rs
+//
+// pub trait Trait: frame_system::Trait {
+// 	/// The class ID type
+// 	type ClassId: Parameter + Member + AtLeast32BitUnsigned + Default + Copy;
+// 	/// The token ID type
+// 	type TokenId: Parameter + Member + AtLeast32BitUnsigned + Default + Copy;
+// 	/// The class properties type
+// 	type ClassData: Parameter + Member;
+// 	/// The token properties type
+// 	type TokenData: Parameter + Member;
+// }
+
+impl orml_nft::Trait for Runtime {
+	// TODO implement above trait in runtime
+	// https://substrate.dev/docs/en/tutorials/add-a-pallet/configure-a-pallet
+	// Types come from here: 
+	// https://substrate.dev/rustdocs/v2.0.0/sp_runtime/traits/index.html,
+	// https://substrate.dev/rustdocs/v2.0.0/frame_support/index.html
+
+	
+	type Event = Event;
+}
+
 // Configure FRAME pallets to include in runtime.
 
 impl frame_system::Trait for Runtime {
@@ -283,6 +307,7 @@ construct_runtime!(
 		Sudo: pallet_sudo::{Module, Call, Config<T>, Storage, Event<T>},
 		// Include the custom logic from the template pallet in the runtime.
 		TemplateModule: pallet_template::{Module, Call, Storage, Event<T>},
+		Tokens: orml_nft::{Module, Storage, Call, Event<T>, Config<T>},
 	}
 );
 
